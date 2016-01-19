@@ -22,16 +22,22 @@ def notif(toaddr='changh20@gmail.com', subject=None, message=None):
     server.login(username,passwd)
 
     # Send email
-    senddate=datetime.strftime(datetime.now(), '%Y-%m-%d')
+    senddate=datetime.strftime(datetime.now(), '%Y-%m-%d -- %I:%M %p')
     if subject is None: 
         subject="Notification"
     m = "From: %s\r\n" % fromaddr + "To: %s\r\n" % toaddr + "Subject: %s\r\n" % subject + "\r\n" 
     if message is None: 
-        msg = '''
-        Notification. 
-        '''
+        msg = 'Notification'
     else: 
         msg = message
+    time_stamp = '\tSent at '+senddate
+
+    msg += time_stamp
+
 
     server.sendmail(fromaddr, [toaddr], m+msg)
     server.quit()
+
+if __name__=='__main__': 
+
+    notif(subject='testing')
