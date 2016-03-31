@@ -1,8 +1,6 @@
 #!/usr/bin/python
-username        = 'changs.code@gmail.com'
-passwd          = 'Changh37'
-
 import sys,os
+import pickle
 import optparse
 import pylab as pl
 import re
@@ -10,11 +8,13 @@ from numpy import array,random,argsort, where
 import smtplib
 from datetime import datetime
 
+
 def notif(toaddr='changh20@gmail.com', subject=None, message=None):
     """
     Sends an email notification through GMail .
     """
-    fromaddr='changs.code@gmail.com'
+    username, passwd = _ReadCred()
+    fromaddr=username
 
     # Initialize SMTP server
     server=smtplib.SMTP('smtp.gmail.com:587')
@@ -38,6 +38,15 @@ def notif(toaddr='changh20@gmail.com', subject=None, message=None):
     server.sendmail(fromaddr, [toaddr], m+msg)
     server.quit()
 
-if __name__=='__main__': 
+def make_cred(username, password): 
+    ''' Make credentials file
+    '''
+    pickle.dump([username, password], open('dat/login.sav', 'wb'))
+    return None
 
+def _ReadCred(): 
+    return pickle.load(open('dat/login.sav', 'rb'))
+
+if __name__=='__main__': 
+    make_cred('changs.code@gmail.com', 'Changh37')
     notif(subject='testing')
