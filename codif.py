@@ -38,7 +38,7 @@ def notif(toaddr='changh20@gmail.com', subject=None, message=None):
     server.sendmail(fromaddr, [toaddr], m+msg)
     server.quit()
 
-def make_cred(username, password): 
+def _MakeCred(username, password): 
     ''' Make credentials file
     '''
     pickle.dump([username, password], open('dat/login.sav', 'wb'))
@@ -46,7 +46,3 @@ def make_cred(username, password):
 
 def _ReadCred(): 
     return pickle.load(open('dat/login.sav', 'rb'))
-
-if __name__=='__main__': 
-    make_cred('changs.code@gmail.com', 'Changh37')
-    notif(subject='testing')
