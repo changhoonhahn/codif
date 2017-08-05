@@ -41,8 +41,8 @@ def notif(toaddr='changh20@gmail.com', subject=None, message=None):
 def _MakeCred(username, password): 
     ''' Make credentials file
     '''
-    pickle.dump([username, password], open('dat/login.sav', 'wb'))
+    pickle.dump([username, password], open(os.path.dirname(os.path.realpath(__file__))+'/dat/login.sav', 'wb'))
     return None
 
 def _ReadCred(): 
-    return pickle.load(open('dat/login.sav', 'rb'))
+    return pickle.load(open(os.path.dirname(os.path.realpath(__file__))+'/dat/login.sav', 'rb'))
